@@ -1,4 +1,4 @@
-Package: Aki
+Package: spatialNetSmooth
 Type: Package
 Title: Smoothing GSEA-scores using netSmooth
 Version: 0.1.0
