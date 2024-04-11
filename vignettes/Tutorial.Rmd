@@ -1,0 +1,16 @@
+---
+title: "Indtroduction to spatialNetSmooth"
+author:
+  -name: Rahel Berghold
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(netSmooth)
+library(pheatmap)
+library(SingleCellExperiment)
+```
+
+
+# Introduction
+# Smoothing Spatial Gene-Expression with spatialNetSmooth
