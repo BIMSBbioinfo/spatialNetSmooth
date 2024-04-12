@@ -1,14 +1,13 @@
 ---
-title: "Indtroduction to spatialNetSmooth"
+title: "Introduction to spatialNetSmooth"
 author:
   -name: Rahel Berghold
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-library(netSmooth)
-library(pheatmap)
-library(SingleCellExperiment)
+library(spatialNetSmooth)
+library(ggplot2)
 ```
 
 
