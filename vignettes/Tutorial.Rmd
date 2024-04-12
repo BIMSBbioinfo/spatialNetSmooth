@@ -12,4 +12,5 @@ library(ggplot2)
 
 
 # Introduction
+
 # Smoothing Spatial Gene-Expression with spatialNetSmooth
