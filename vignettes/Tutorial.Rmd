@@ -6,11 +6,24 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-library(spatialNetSmooth)
-library(ggplot2)
+#library(spatialNetSmooth)
+#library(ggplot2)
 ```
 
 
 # Introduction
 
 # Smoothing Spatial Gene-Expression with spatialNetSmooth
+First, let's get a small Seurat-Object for testing:
+```{r}
+seu <- readRDS(file = "seu.Rds")
+```
+Next, we need a list of genes on which to calculate gsea-scores for each cell. Per default, spatialNetSmooth uses the Ikarus-Dateset, but it's also possible to use other Genes by specifying a gene-list in .csv-Format:
+```{r}
+genes = "Datasets - Ikarus - Gene_lists.csv"
+```
+Let's calculate the raw gsea-scores first. Per default, spatialNetSmooth looks for an assay named "Spatial", but other assays can be specified:
+```{r}
+gsea_score <- gseaCalc(seu, genes = genes, Assay= "Spatial")
+```
+
