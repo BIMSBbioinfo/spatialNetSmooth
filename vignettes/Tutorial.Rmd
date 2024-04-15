@@ -8,6 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 #library(spatialNetSmooth)
 #library(ggplot2)
+#library(Seurat)
 ```
 
 
@@ -18,12 +19,31 @@ First, let's get a small Seurat-Object for testing:
 ```{r}
 seu <- readRDS(file = "seu.Rds")
 ```
-Next, we need a list of genes on which to calculate gsea-scores for each cell. Per default, spatialNetSmooth uses the Ikarus-Dateset, but it's also possible to use other Genes by specifying a gene-list in .csv-Format:
+Next, we need a list of genes on which to calculate gsea-scores for each cell. Per default, spatialNetSmooth uses the Ikarus-Dataset, but it's also possible to use other Genes by specifying a gene-list in .csv-Format:
 ```{r}
 genes = "Datasets - Ikarus - Gene_lists.csv"
 ```
 Let's calculate the raw gsea-scores first. Per default, spatialNetSmooth looks for an assay named "Spatial", but other assays can be specified:
 ```{r}
 gsea_score <- gseaCalc(seu, genes = genes, Assay= "Spatial")
+
+```
+If we know the ground truth, we can make a spatial plot of the truth of prediction, using a threshold (1-10 meaning the percentiles).
+```{r}
+coord <- GetTissueCoordinates(seu)
+plot_quant(gsea_score, coordinates = coord, truth = truth, threshold = 7)
+```
+To make the prediction more accurate, we can can calculate the scores using network-smoothing. There are different options for this, which either rely on spatial neighbourhood, a similarity in gene expression or a mixture of both. In this example, we will do smoothing based on nearest neighbours expression-vise first and spatial afterwards. For this, we use the function nn_spatial_smooth().
+```{r}
+smooth_scores<- nn_spatial_smooth(seu, graph = "nn")
+```
+Again, we can compare the prediction to the ground-truth:
+```{r}
+plot_quant(smooth_scores, coordinates = coord, truth = truth, threshold = 7)
+```
+It is also possible to specify the smoothing-coefficient alpha for netSmooth and calculate the F1-Score of the prediction for different thresholds:
+```{r}
+smooth_scores<- nn_spatial_smooth(seu, a1 = 0.5, a2 = 0.8, graph = "nn")
+F1 <- F1_quant(smooth_scores, truth)
 ```
 
