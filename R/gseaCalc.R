@@ -11,7 +11,7 @@
 #' @importFrom magrittr set_rownames
 
 
-gseaCalc <- function(se, genes = "V1_Breast_Cancer_Block_A_Section_2_spatial/Datasets - Ikarus - Gene_lists.csv", assay= "Spatial"){
+gseaCalc <- function(se, genes = "data/Datasets - Ikarus - Gene_lists.csv", assay= "Spatial"){
   genes = read.csv(genes) %>%
     dplyr::rename(type = X)
   glist = with(genes, split(genes, type))
@@ -32,7 +32,7 @@ gseaCalc <- function(se, genes = "V1_Breast_Cancer_Block_A_Section_2_spatial/Dat
   lnams = names(glist)
   gset = GeneSetCollection(lapply(setNames(lnams, lnams), function(x)GeneSet(glist[[x]], setName=x)))
   mat = as.matrix(GetAssayData(se, assay))
-  se.it <- enrichIt(obj = mat, gene.sets = gset, groups = 1000, cores = 2)
+  se.it <- enrich_it(obj = mat, gene.sets = gset, groups = 1000, cores = 2)
   rm(mat)
 
   seu = se

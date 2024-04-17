@@ -15,7 +15,7 @@
 #' @import Seurat
 #' @import dplyr
 
-nn_spatial_smooth <- function(seu, genes = "V1_Breast_Cancer_Block_A_Section_2_spatial/Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a1 = 0.8, a2 = 0.8, graph = "nn"){
+nn_spatial_smooth <- function(seu, genes = "Data/Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a1 = 0.8, a2 = 0.8, graph = "nn"){
   seu <- gseaCalc(seu, genes, assay)
   if (graph== "snn")  neighbours <- as.matrix(seu@graphs$Spatial_snn)
   else neighbours <- as.matrix(seu@graphs$Spatial_nn)

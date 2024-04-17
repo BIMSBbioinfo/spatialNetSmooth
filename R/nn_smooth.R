@@ -11,7 +11,7 @@
 #' @importFrom netSmooth netSmooth
 
 
-nn_smooth <- function(seu, genes = "V1_Breast_Cancer_Block_A_Section_2_spatial/Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a = 0.8, graph = "nn"){
+nn_smooth <- function(seu, genes = "data/Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a = 0.8, graph = "nn"){
   seu <- gseaCalc(seu, genes, assay)
   if (graph== "snn")  neighbours <- as.matrix(seu@graphs$Spatial_snn)
   else neighbours <- as.matrix(seu@graphs$Spatial_nn)
