@@ -1,5 +1,5 @@
 seu <- readRDS("data/seu.Rds")
-gsea <- readRDS("data/gsea_nn.Rds")
+gsea <- readRDS("tests/testdata/gsea_nn.Rds")
 test_that("smoothing works", {
   seu2 <- nn_smooth(seu)
   expect_equal(seu2$gsea_rat_norm, gsea)

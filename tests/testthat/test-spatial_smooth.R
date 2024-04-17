@@ -1,5 +1,6 @@
-seu <- readRDS("data/seu.Rds")
-gsea <- readRDS("data/gsea_spatial.Rds")
+seu <- readRDS(system.file("data", "seu.Rds", package = "spatialNetSmooth"))
+gsea <- readRDS(system.file("tests/testdata", "gsea_spatial.Rds", package = "spatialNetSmooth"))
+#gsea <- readRDS("tests/testdata/gsea_spatial.Rds")
 test_that("smoothing works", {
   seu2 <- spatial_smooth(seu)
   expect_equal(seu2$gsea_rat_norm, gsea)
