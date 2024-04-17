@@ -9,7 +9,7 @@
 #' @import Seurat
 #' @import dplyr
 
-spatial_smooth <- function(seu, genes = "V1_Breast_Cancer_Block_A_Section_2_spatial/Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a = 0.8){
+spatial_smooth <- function(seu, genes = "data/Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a = 0.8){
   seu <- gseaCalc(seu, genes, assay)
   adj_mat <- adj_matrix(seu)
   gsea_score <- seu@meta.data$gsea_rat_norm

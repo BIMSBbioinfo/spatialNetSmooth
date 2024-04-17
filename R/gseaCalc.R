@@ -6,7 +6,6 @@
 #' @export
 #' @import Seurat
 #' @import dplyr
-#' @importFrom escape enrichIt
 #' @importFrom GSEABase GeneSetCollection
 #' @importFrom magrittr set_rownames
 
