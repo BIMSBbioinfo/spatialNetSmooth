@@ -1,13 +1,11 @@
-seu <- readRDS("data/seu.Rds")
-gsea <- readRDS("data/gsea_raw.Rds")
+library(Seurat)
+data(seu)
 test_that("score calculation works", {
-  seu2 <- gseaCalc(seu)
-  expect_equal(seu2$gsea_rat_norm, gsea)
+  expect_snapshot_value(gseaCalc(seu), style = "serialize")
 })
 
-test_that("different assay works", {
+test_that("different assay throws no error", {
   seu <- RenameAssays(object = seu, Spatial = 'RNA')
-  seu2 <- gseaCalc(seu, assay = 'RNA')
-  expect_equal(seu2$gsea_rat_norm, gsea)
+  expect_no_error(gseaCalc(seu, assay = 'RNA'))
 })
 

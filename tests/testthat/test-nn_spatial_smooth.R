@@ -1,8 +1,8 @@
-seu <- readRDS("data/seu.Rds")
-gsea <- readRDS("tests/testdata/gsea_nn_spatial.Rds")
+library(Seurat)
+data(seu)
+
 test_that("smoothing works", {
-  seu2 <- nn_spatial_smooth(seu)
-  expect_equal(seu2$gsea_rat_norm, gsea)
+  expect_snapshot_value(nn_spatial_smooth(seu), style = "serialize")
 })
 
 test_that("different graph throws no error", {

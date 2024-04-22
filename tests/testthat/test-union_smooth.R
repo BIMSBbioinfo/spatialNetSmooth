@@ -1,11 +1,9 @@
-seu <- readRDS("data/seu.Rds")
-gsea <- readRDS("tests/testdata/gsea_union.Rds")
+library(Seurat)
+data(seu)
+
 test_that("smoothing works", {
-  seu2 <- union_smooth(seu)
-  expect_equal(seu2$gsea_rat_norm, gsea)
+  expect_snapshot_value(union_smooth(seu), style = "serialize")
 })
-
-
 test_that("different graph throws no error", {
   expect_no_error(union_smooth(seu, graph = 'snn'))
 })
