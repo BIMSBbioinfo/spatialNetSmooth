@@ -4,11 +4,7 @@
 \alias{gseaCalc}
 \title{calculate gsea-score}
 \usage{
-gseaCalc(
-  se,
-  genes = "V1_Breast_Cancer_Block_A_Section_2_spatial/Datasets - Ikarus - Gene_lists.csv",
-  assay = "Spatial"
-)
+gseaCalc(se, genes = "Datasets - Ikarus - Gene_lists.csv", assay = "Spatial")
 }
 \arguments{
 \item{se}{Seurat object}
