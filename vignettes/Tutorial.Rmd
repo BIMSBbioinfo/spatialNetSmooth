@@ -6,26 +6,27 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-#library(spatialNetSmooth)
-#library(ggplot2)
-#library(Seurat)
+library(spatialNetSmooth)
+library(ggplot2)
+library(Seurat)
 ```
 
 
 # Introduction
 
+
 # Smoothing Spatial Gene-Expression with spatialNetSmooth
 First, let's get a small Seurat-Object for testing:
 ```{r}
-seu <- readRDS(file = "seu.Rds")
+data(seu)
 ```
 Next, we need a list of genes on which to calculate gsea-scores for each cell. Per default, spatialNetSmooth uses the Ikarus-Dataset, but it's also possible to use other Genes by specifying a gene-list in .csv-Format:
 ```{r}
-genes = "Datasets - Ikarus - Gene_lists.csv"
+data(geneset_ikarus)
 ```
 Let's calculate the raw gsea-scores first. Per default, spatialNetSmooth looks for an assay named "Spatial", but other assays can be specified:
 ```{r}
-gsea_score <- gseaCalc(seu, genes = genes, Assay= "Spatial")
+gsea_score <- gseaCalc(seu, genes = genes, assay= "Spatial")
 
 ```
 If we know the ground truth, we can make a spatial plot of the truth of prediction, using a threshold (1-10 meaning the percentiles).
