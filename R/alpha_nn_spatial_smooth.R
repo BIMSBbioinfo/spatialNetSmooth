@@ -16,10 +16,7 @@
 #' @import dplyr
 
 alpha_nn_spatial_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", alpha= 0.4, a = 0.8, graph = "nn"){
-  if (genes == "Datasets - Ikarus - Gene_lists.csv"){
-    genes <- system.file("data", "Datasets - Ikarus - Gene_lists.csv", package = "spatialNetSmooth")
-  }
-      
+
   seu <- gseaCalc(seu, genes, assay)
   if (graph== "snn")  neighbours <- as.matrix(seu@graphs$Spatial_snn)
   else neighbours <- as.matrix(seu@graphs$Spatial_nn)

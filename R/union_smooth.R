@@ -13,7 +13,7 @@
 #' @importFrom netSmooth netSmooth
 #' @import Seurat
 #' @import dplyr
-union_smooth <- function(seu, genes = "data/Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a = 0.8, graph = "nn"){
+union_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a = 0.8, graph = "nn"){
   seu <- gseaCalc(seu, genes, assay)
   if (graph== "snn")  neighbours <- as.matrix(seu@graphs$Spatial_snn)
   else neighbours <- as.matrix(seu@graphs$Spatial_nn)
