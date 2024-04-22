@@ -6,19 +6,22 @@
 #' @export
 #' @import Seurat
 #' @import dplyr
-#' @importFrom GSEABase GeneSetCollection
+#' @importFrom GSEABase GeneSetCollection GeneSet
 #' @importFrom magrittr set_rownames
 
 
-gseaCalc <- function(se, genes = "data/Datasets - Ikarus - Gene_lists.csv", assay= "Spatial"){
+gseaCalc <- function(se, genes = "Datasets - Ikarus - Gene_lists.csv", assay= "Spatial"){
+  if(genes == "Datasets - Ikarus - Gene_lists.csv"){
+  genes <- system.file("data", "Datasets - Ikarus - Gene_lists.csv", package = "spatialNetSmooth")
+  }else{
+    genes <- read.csv(genes)
+  }
   genes = read.csv(genes) %>%
     dplyr::rename(type = X)
   glist = with(genes, split(genes, type))
   ndims = 10
-
   VariableFeatures(se) = unlist(glist)
-
-
+  
   se = se %>%
     NormalizeData() %>%
     ScaleData() %>%
