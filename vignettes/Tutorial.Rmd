@@ -11,10 +11,6 @@ library(ggplot2)
 library(Seurat)
 ```
 
-
-# Introduction
-
-
 # Smoothing Spatial Gene-Expression with spatialNetSmooth
 First, let's get a small Seurat-Object for testing:
 ```{r}
