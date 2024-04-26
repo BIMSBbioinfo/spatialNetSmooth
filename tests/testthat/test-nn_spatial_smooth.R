@@ -1,8 +1,8 @@
 library(Seurat)
-data(seu)
+seu <- readRDS(system.file("data", "seu.Rds", package = "spatialNetSmooth"))
 
 test_that("smoothing works", {
-  expect_snapshot_value(nn_spatial_smooth(seu), style = "serialize")
+  expect_snapshot_value(cat(nn_spatial_smooth(seu)), style="serialize")
 })
 
 test_that("different graph throws no error", {

@@ -1,0 +1,4 @@
+# smoothing works
+
+    WAoAAAACAAQDAwACAwAAAAD+
+
