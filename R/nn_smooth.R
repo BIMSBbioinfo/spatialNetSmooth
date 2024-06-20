@@ -12,7 +12,9 @@
 
 
 nn_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a = 0.8, graph = "nn"){
-  seu <- gseaCalc(seu, genes, assay)
+  if (!("gsea_rat_norm" %in% colnames(seu@meta.data))) {
+    seu <- gseaCalc(seu, genes, assay)
+  }
   graphs <- paste(assay, "_", graph, sep="")
   neighbours <- as.matrix(seu@graphs[[graphs]])
   gsea_score <- seu@meta.data$gsea_rat_norm

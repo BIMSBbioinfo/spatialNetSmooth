@@ -10,7 +10,9 @@
 #' @import dplyr
 
 spatial_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a = 0.8){
-  seu <- gseaCalc(seu, genes, assay)
+  if (!("gsea_rat_norm" %in% colnames(seu@meta.data))) {
+    seu <- gseaCalc(seu, genes, assay)
+      }
   adj_mat <- adj_matrix(seu)
   gsea_score <- seu@meta.data$gsea_rat_norm
   gsea_score <- matrix(gsea_score,ncol = 1)
