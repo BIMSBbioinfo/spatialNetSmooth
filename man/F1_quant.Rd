@@ -4,11 +4,21 @@
 \alias{F1_quant}
 \title{F1_quant}
 \usage{
-F1_quant(gsea_score, truth)
+F1_quant(gsea_score, tumor)
 }
 \arguments{
-\item{truth}{}
+\item{gsea_score}{calculated score for each cell}
+
+\item{tumor}{vector for all cells with 1 for tumor and 0 for normal cells}
+}
+\value{
+vector of F1-scores for different thresholds
 }
 \description{
 F1_quant
+}
+\examples{
+scores <-c(0.64, 0.048, 0.01)
+tumor <- c(1, 0, 0)
+F1_quant(scores, tumor)
 }

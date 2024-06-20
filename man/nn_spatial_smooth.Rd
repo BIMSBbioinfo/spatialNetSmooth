@@ -5,7 +5,7 @@
 \title{nn_spatial_smooth}
 \usage{
 nn_spatial_smooth(
-  seu,
+  se,
   genes = "Datasets - Ikarus - Gene_lists.csv",
   assay = "Spatial",
   a1 = 0.8,
@@ -14,8 +14,6 @@ nn_spatial_smooth(
 )
 }
 \arguments{
-\item{seu}{Seurat-Object}
-
 \item{genes}{csv-file indicating which genes to use (optional)}
 
 \item{assay}{which assay to use (optional)}
@@ -25,6 +23,8 @@ nn_spatial_smooth(
 \item{a2}{alpha for spatial smoothing (optional)}
 
 \item{graph}{which neighbour-graph to use, "nn" or "snn"}
+
+\item{seu}{Seurat-Object}
 }
 \value{
 vector with smoothed score

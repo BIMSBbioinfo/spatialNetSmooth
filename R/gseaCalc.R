@@ -20,7 +20,7 @@ gseaCalc <- function(se, genes = "Datasets - Ikarus - Gene_lists.csv", assay= "S
     dplyr::rename(type = X)
   glist = with(genes, split(genes, type))
   ndims = 10
-  VariableFeatures(se) = unlist(glist)
+  VariableFeatures(se, assay = assay) = unlist(glist)
   
   se = se %>%
     NormalizeData() %>%
