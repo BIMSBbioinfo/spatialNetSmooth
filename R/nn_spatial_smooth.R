@@ -16,6 +16,7 @@
 #' @import dplyr
 
 nn_spatial_smooth <- function(se, genes = "Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a1 = 0.8, a2 = 0.8, graph = "nn"){
+  #calculation for Seurat-object
   if(inherits(se, "Seurat")){
     if (!("gsea_rat_norm" %in% colnames(se@meta.data))) {
       se <- gseaCalc(se, genes, assay)
@@ -31,8 +32,19 @@ nn_spatial_smooth <- function(se, genes = "Datasets - Ikarus - Gene_lists.csv", 
   return(smoothed)
   }
   else if(inherits(se, "VoltRon")){
-    
-  }else{
+    if (!("gsea_rat_norm" %in% colnames(Metadata(se)))) {
+      se <- gseaCalc(se, genes, assay)
+    }
+      adj <- as.matrix(as_adjacency_matrix(se@graph$radius))
+      graph <- as.matrix(as_adjacency_matrix(se@graph$SNN))
+      gsea_score <- Metadata(se)$gsea_rat_norm
+      gsea_score <- as.matrix(gsea_score,ncol = 1)
+      rownames(gsea_score) <- rownames(Metadata(se))
+      smoothed <- netSmooth(gsea_score, graph, alpha = a1)
+      smoothed <- netSmooth(smoothed, adj, alpha = a2)
+      return(smoothed)
+  } 
+  else{
     stop("Input must be either of type Seurat or VoltRon")
   }
-}
+  }

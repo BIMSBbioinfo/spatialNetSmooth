@@ -20,12 +20,12 @@ gseaCalc <- function(se, genes = "Datasets - Ikarus - Gene_lists.csv", assay= "S
     dplyr::rename(type = X)
   glist = with(genes, split(genes, type))
   ndims = 10
-  VariableFeatures(se, assay = assay) = unlist(glist)
-  
+  if(inherits(se, "Seurat")){
+
   se = se %>%
-    NormalizeData() %>%
-    ScaleData() %>%
+    NormalizeData() %>%#reihenfolge geändert scaling variable features
     FindVariableFeatures(selection.method = 'mvp') %>%
+    ScaleData() %>%
     RunPCA(verbose = FALSE, features = unlist(glist)) %>%
     FindNeighbors(reduction = "pca", dims = 1:ndims) %>%
     FindClusters(verbose = FALSE) %>%
@@ -55,5 +55,42 @@ gseaCalc <- function(se, genes = "Datasets - Ikarus - Gene_lists.csv", assay= "S
     mutate(gsea_rat              = log2((gsea_Tumor + 1)/ (gsea_Normal + 1))) %>%
     mutate(gsea_rat_norm = log2((gsea_Tumor_norm+1) / (gsea_Normal_norm + 1))) %>%
     magrittr::set_rownames(.$cell_id)
-  return(seu)
+  
+  return(seu)}
+  else if(inherits(se, "VoltRon")){
+    se <- normalizeData(se, sizefactor = 1000,method = "LogQ3Norm")
+    features <- getVariableFeatures(se, n=3000)
+    se <- getPCA(se, dims= 20, type= "pca", features=features, overwrite = T) %>%
+      getSpatialNeighbors(method="radius") %>%
+      getProfileNeighbors(dims = 1:10, k = 10, method = "SNN")
+    genes = "data/Datasets - Ikarus - Gene_lists.csv"
+
+    lnams = names(glist)
+    gset = GeneSetCollection(lapply(setNames(lnams, lnams), function(x)GeneSet(glist[[x]], setName=x)))
+    mat <- as.matrix(vrData(se, assay= assay))
+    se.it <- enrich_it(obj = mat, gene.sets = gset, groups = 1000, cores = 2)
+    
+    cells <- colnames(mat)
+    rm(mat)
+    Metadata(se) = Metadata(se) %>%
+      cbind(
+        se.it %>%
+          as.data.frame() %>%
+          magrittr::set_colnames(paste0('gsea_', colnames(.)))
+      ) %>%
+      mutate(gsea_Normal_norm      = gsea_Normal) %>%
+      mutate(gsea_Normal_norm      = gsea_Normal_norm - min(gsea_Normal_norm)) %>%
+      mutate(gsea_Normal_norm      = gsea_Normal_norm / max(gsea_Normal_norm)) %>%
+      
+      mutate(gsea_Tumor_norm       = gsea_Tumor) %>%
+      mutate(gsea_Tumor_norm       = gsea_Tumor_norm  - min(gsea_Tumor_norm)) %>%
+      mutate(gsea_Tumor_norm       = gsea_Tumor_norm / max(gsea_Tumor_norm)) %>%
+      
+      mutate(gsea_rat              = log2((gsea_Tumor + 1)/ (gsea_Normal + 1))) %>%
+      mutate(gsea_rat_norm = log2((gsea_Tumor_norm+1) / (gsea_Normal_norm + 1))) %>%
+      magrittr::set_rownames(cells)
+    return(se)
+  }else{
+    stop("Input must be either of type Seurat or VoltRon")
+  }
 }
