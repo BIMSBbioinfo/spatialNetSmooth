@@ -24,10 +24,10 @@ spatial_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists.csv", as
     if (!("gsea_rat_norm" %in% colnames(Metadata(seu)))) {
       seu <- gseaCalc(seu, genes, assay)
     }
-    adj <- as.matrix(as_adjacency_matrix(se@graph$radius))
-    gsea_score <- Metadata(se)$gsea_rat_norm
+    adj <- as.matrix(as_adjacency_matrix(seu@graph$radius))
+    gsea_score <- Metadata(seu)$gsea_rat_norm
     gsea_score <- as.matrix(gsea_score,ncol = 1)
-    rownames(gsea_score) <- rownames(Metadata(se))
+    rownames(gsea_score) <- rownames(Metadata(seu))
     smoothed <- netSmooth(gsea_score, adj, alpha = a)
     return(smoothed)
   }else{

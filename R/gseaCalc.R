@@ -58,11 +58,12 @@ gseaCalc <- function(se, genes = "Datasets - Ikarus - Gene_lists.csv", assay= "S
   
   return(seu)}
   else if(inherits(se, "VoltRon")){
-    se <- normalizeData(se, sizefactor = 1000,method = "LogQ3Norm")
-    features <- getVariableFeatures(se, n=3000)
+    se <- normalizeData(se, sizefactor =10000) %>%
+          getFeatures(n=3000)
+    features <- getVariableFeatures(se)
     se <- getPCA(se, dims= 20, type= "pca", features=features, overwrite = T) %>%
       getSpatialNeighbors(method="radius") %>%
-      getProfileNeighbors(dims = 1:10, k = 10, method = "SNN")
+      getProfileNeighbors(dims = 1:20, k = 10, method = "SNN")
     genes = "data/Datasets - Ikarus - Gene_lists.csv"
 
     lnams = names(glist)
