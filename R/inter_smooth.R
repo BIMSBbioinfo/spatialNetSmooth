@@ -39,7 +39,7 @@ inter_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists.csv", assa
     gsea_score <- Metadata(seu)$gsea_rat_norm
     gsea_score <- as.matrix(gsea_score,ncol = 1)
     rownames(gsea_score) <- rownames(Metadata(seu))
-    identity_matrix <- diag(1, nrow = nrow(adj_mat), ncol = ncol(adj_mat))
+    identity_matrix <- diag(1, nrow = nrow(adj), ncol = ncol(adj))
     adj <- adj + identity_matrix
     intersection <- (adj & graph)*1
     smoothed <- netSmooth(gsea_score, intersection, alpha = a)
