@@ -4,7 +4,7 @@
 \alias{plot_quant}
 \title{plot_quant}
 \usage{
-plot_quant(gsea_score, coordinates, truth, threshold)
+plot_quant(gsea_score, coordinates, truth)
 }
 \arguments{
 \item{gsea_score}{calculated score for each cell}

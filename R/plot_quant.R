@@ -9,20 +9,11 @@
 #' @export
 #' @import ggplot2
 #' @examples plot_quant(gsea, coords, truth, 5)
-plot_quant <- function(gsea_score, coordinates, truth, threshold){
-  quant <- quantile(gsea_score, probs = seq(0,1,by =0.05))
-  quant_min <- quant[2]
-  quant_max <- quant[20]
-  for(i in seq_along(gsea_score)) {
-    if(gsea_score[i] < quant_min){
-      gsea_score[i] <- quant_min
-    }else if(gsea_score[i] > quant_max){
-      gsea_score[i] <- quant_max
-    }
-  }
+plot_quant <- function(gsea_score, coordinates, truth){
+  roc_c <-roc(response= truth, predictor=gsea_score)
+  coords <- coords(roc_c, "best", best.method="closest.topleft")
+  thresh <- coords$threshold
   quant <- NULL
-  thresh <- quantile(gsea_score, probs = seq(0,1,by =0.1))
-  thresh <- thresh[threshold]
   for (i in seq_along(gsea_score)) {
     if (gsea_score[i] >= thresh && truth[i] == 1) {
       quant <- c(quant, 4)

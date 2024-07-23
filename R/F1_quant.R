@@ -9,19 +9,19 @@
 #' @examples scores <-c(0.64, 0.048, 0.01)
 #' tumor <- c(1, 0, 0)
 #' F1_quant(scores, tumor)
-F1_quant <- function(gsea_score, tumor){
-  quant <- quantile(gsea_score, probs = seq(0,1,by =0.05))
+F1_quant <- function(gsea_score, tumor, gsea_raw){
+  quant <- quantile(gsea_raw, probs = seq(0,1,by =0.05))
   quant_min <- quant[2]
   quant_max <- quant[20]
-  for(i in seq_along(gsea_score)) {
-    if(gsea_score[i] < quant_min){
-      gsea_score[i] <- quant_min
+  for(i in seq_along(gsea_raw)) {
+    if(gsea_raw[i] < quant_min){
+      gsea_raw[i] <- quant_min
     }else if(gsea_score[i] > quant_max){
-      gsea_score[i] <- quant_max
+      gsea_raw[i] <- quant_max
     }
   }
   vec <-NULL
-  threshold <- quantile(gsea_score, probs = seq(0,1,by =0.1))
+  threshold <- quantile(gsea_raw, probs = seq(0,1,by =0.1))
   for (g in threshold) {
     for(i in seq_along(gsea_score)) {
       if(gsea_score[i] < g){
@@ -29,7 +29,7 @@ F1_quant <- function(gsea_score, tumor){
       }else if(gsea_score[i] > g){
         vec <- append(vec,1)
       }
-
+      
     }
   }
   F1 <- NULL
@@ -46,7 +46,7 @@ F1_quant <- function(gsea_score, tumor){
   quant9 <- vec[(n*8+1):(n*9)]
   quant10 <- vec[(n*9+1):(n*10)]
   quant11 <- vec[(n*10+1):(n*11)]
-
+  
   tumor <- as.factor(tumor)
   quant1 <- as.factor(quant1)
   quant2 <- as.factor(quant2)

@@ -4,7 +4,7 @@
 \alias{F1_quant}
 \title{F1_quant}
 \usage{
-F1_quant(gsea_score, tumor)
+F1_quant(gsea_score, tumor, gsea_raw)
 }
 \arguments{
 \item{gsea_score}{calculated score for each cell}
