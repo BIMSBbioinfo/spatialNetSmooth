@@ -9,11 +9,12 @@ union_smooth(
   genes = "Datasets - Ikarus - Gene_lists.csv",
   assay = "Spatial",
   a = 0.8,
-  graph = "nn"
+  graph = "nn",
+  k = 7
 )
 }
 \arguments{
-\item{seu}{Seurat-Object}
+\item{seu}{Seurat-Object or VoltRon object}
 
 \item{genes}{csv-file indicating which genes to use (optional)}
 
@@ -22,6 +23,8 @@ union_smooth(
 \item{a}{alpha for smoothing (optional)}
 
 \item{graph}{which neighbour-graph to use, "nn" or "snn"}
+
+\item{k}{distance of cell to neighbors}
 }
 \value{
 vector with smoothed scores

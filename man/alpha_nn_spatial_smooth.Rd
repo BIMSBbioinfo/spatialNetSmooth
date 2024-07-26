@@ -10,11 +10,12 @@ alpha_nn_spatial_smooth(
   assay = "Spatial",
   alpha = 0.4,
   a = 0.8,
-  graph = "nn"
+  graph = "nn",
+  k = 7
 )
 }
 \arguments{
-\item{seu}{a Seurat-Object}
+\item{seu}{a Seurat-Object or VoltRon-Object}
 
 \item{genes}{csv-file indicating which genes to use (optional)}
 
@@ -24,7 +25,9 @@ alpha_nn_spatial_smooth(
 
 \item{a}{alpha for smoothing (optional)}
 
-\item{graph}{which neighbour-graph to use, "nn" or "snn"}
+\item{graph}{which neighbor-graph to use, "nn" or "snn"}
+
+\item{k}{distance of cell to neighbors}
 }
 \value{
 vector with smoothed scores

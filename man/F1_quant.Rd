@@ -10,6 +10,8 @@ F1_quant(gsea_score, tumor, gsea_raw)
 \item{gsea_score}{calculated score for each cell}
 
 \item{tumor}{vector for all cells with 1 for tumor and 0 for normal cells}
+
+\item{gsea_raw}{vector of unsmoothed scores for thresholding}
 }
 \value{
 vector of F1-scores for different thresholds

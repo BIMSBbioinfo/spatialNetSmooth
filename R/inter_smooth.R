@@ -1,11 +1,11 @@
 #' intersection smoothing
 #'
-#' @param seu Seurat-Object
+#' @param seu Seurat-Object or VoltRon object
 #' @param genes csv-file indicating which genes to use (optional)
 #' @param assay which assay to use (optional)
 #' @param a alpha for smoothing (optional)
 #' @param graph which neighbour-graph to use, "nn" or "snn"
-#'
+#' @param k distance of cell to neighbors
 #' @return vector with smoothed scores
 #' @export
 #'
@@ -13,7 +13,7 @@
 #' @importFrom netSmooth netSmooth
 #' @import Seurat
 #' @import dplyr
-inter_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a = 0.8, graph = "nn"){
+inter_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists.csv", assay = "Spatial", a = 0.8, graph = "nn", k=7){
   if(inherits(seu, "Seurat")){
     if (!("gsea_rat_norm" %in% colnames(seu@meta.data))) {
       seu <- gseaCalc(seu, genes, assay)
@@ -23,7 +23,7 @@ inter_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists.csv", assa
     gsea_score <- seu@meta.data$gsea_rat_norm
     gsea_score <- matrix(gsea_score,ncol = 1)
     rownames(gsea_score) <- rownames(neighbours)
-    adj_mat <- adj_matrix(seu)
+    adj_mat <- adj_matrix(seu, 7)
     identity_matrix <- diag(1, nrow = nrow(adj_mat), ncol = ncol(adj_mat))
     adj_mat <- adj_mat + identity_matrix
     intersection <- (adj_mat & neighbours)*1

@@ -13,7 +13,7 @@ nn_smooth(
 )
 }
 \arguments{
-\item{seu}{Seurat object}
+\item{seu}{Seurat object or VoltRon object}
 
 \item{genes}{csv-file indicating which genes to use (optional)}
 

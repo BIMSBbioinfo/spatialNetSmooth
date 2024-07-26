@@ -1,6 +1,6 @@
 #' perform nn smoothing
 #'
-#' @param seu    Seurat object
+#' @param seu    Seurat object or VoltRon object
 #' @param genes csv-file indicating which genes to use (optional)
 #' @param assay   which assay to use (optional)
 #' @param graph which neighbour-graph to use, "nn" or "snn"

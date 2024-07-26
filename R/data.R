@@ -6,8 +6,7 @@
 #'https://github.com/BIMSBbioinfo/ikarus
 #'
 #' @format A list of genes with with Type "Tumor" or "Normal"
-#' @source ?
-#' @example 
+#' @source ikarus machine learning pipeline (Dohmen et al. 2022)
 #' data(geneset_ikarus)
 "geneset_ikarus"
 
@@ -17,8 +16,7 @@
 #' 
 #'
 #' @format A Seurat-Object
-#' @source ?
-#' @example
+#' @source from 10xGenomics support page, Human Breast Cancer (Block A Section 1) https://www.10xgenomics.com/datasets/
 #' data(seu)
 "seu"
 

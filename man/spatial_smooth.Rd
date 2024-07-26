@@ -8,17 +8,20 @@ spatial_smooth(
   seu,
   genes = "Datasets - Ikarus - Gene_lists.csv",
   assay = "Spatial",
-  a = 0.8
+  a = 0.8,
+  k = 7
 )
 }
 \arguments{
-\item{seu}{Seurat object}
+\item{seu}{Seurat object or VoltRon object}
 
 \item{genes}{csv-file indicating which genes to use (optional)}
 
 \item{assay}{which assay to use (optional)}
 
 \item{a}{alpha for smoothing (optional)}
+
+\item{k}{distance of cell to neighbors}
 }
 \value{
 vector with smoothed scores

@@ -8,7 +8,8 @@
 A list of genes with with Type "Tumor" or "Normal"
 }
 \source{
-?
+ikarus machine learning pipeline (Dohmen et al. 2022)
+data(geneset_ikarus)
 }
 \usage{
 geneset_ikarus

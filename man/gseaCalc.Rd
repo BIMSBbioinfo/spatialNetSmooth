@@ -7,15 +7,18 @@
 gseaCalc(se, genes = "Datasets - Ikarus - Gene_lists.csv", assay = "Spatial")
 }
 \arguments{
-\item{se}{Seurat object}
+\item{se}{Seurat object or VoltRon object}
 
 \item{genes}{csv-file indicating which genes to use (optional)}
 
 \item{assay}{which assay to use (optional)}
 }
 \value{
-Seurat object with calculated scores in meta.data
+Seurat/VoltRon object with calculated scores in meta.data
 }
 \description{
 calculate gsea-score
+}
+\examples{
+gseaCalc(seu, assay="RNA")
 }

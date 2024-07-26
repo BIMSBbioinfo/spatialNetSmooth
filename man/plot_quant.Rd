@@ -7,20 +7,18 @@
 plot_quant(gsea_score, coordinates, truth)
 }
 \arguments{
-\item{gsea_score}{calculated score for each cell}
+\item{gsea_score}{vector of calculated score for each cell}
 
-\item{coordinates}{of cell}
+\item{coordinates}{tissue coordinates}
 
 \item{truth}{vector for all cells with 1 for tumor and 0 for normal cells}
-
-\item{threshold}{which percentile to take as threshold (1-10)}
 }
 \value{
-plot of truth of prediction
+plot of truth of prediction thresholded on ROC-curve
 }
 \description{
 plot_quant
 }
 \examples{
-plot_quant(gsea, coords, truth, 5)
+plot_quant(gsea, coords, truth)
 }

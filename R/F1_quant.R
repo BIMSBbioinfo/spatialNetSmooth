@@ -2,7 +2,7 @@
 #'
 #' @param gsea_score calculated score for each cell
 #' @param tumor vector for all cells with 1 for tumor and 0 for normal cells
-#'
+#' @param gsea_raw vector of unsmoothed scores for thresholding
 #' @return vector of F1-scores for different thresholds
 #' @export
 #' @importFrom caret confusionMatrix

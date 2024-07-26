@@ -1,10 +1,12 @@
 #' calculate gsea-score
-#' @param se    Seurat object
+#' @param se    Seurat object or VoltRon object
 #' @param genes csv-file indicating which genes to use (optional)
 #' @param assay   which assay to use (optional)
-#' @return Seurat object with calculated scores in meta.data
+#' @return Seurat/VoltRon object with calculated scores in meta.data
+#' @examples gseaCalc(seu, assay="RNA")
 #' @export
 #' @import Seurat
+#' @import VoltRon
 #' @import dplyr
 #' @importFrom GSEABase GeneSetCollection GeneSet
 #' @importFrom magrittr set_rownames

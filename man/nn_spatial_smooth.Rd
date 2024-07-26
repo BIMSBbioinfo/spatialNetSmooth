@@ -10,7 +10,8 @@ nn_spatial_smooth(
   assay = "Spatial",
   a1 = 0.8,
   a2 = 0.8,
-  graph = "nn"
+  graph = "nn",
+  k = 7
 )
 }
 \arguments{
@@ -24,10 +25,12 @@ nn_spatial_smooth(
 
 \item{graph}{which neighbour-graph to use, "nn" or "snn"}
 
-\item{seu}{Seurat-Object}
+\item{k}{distance of cell to neighbors}
+
+\item{seu}{Seurat-Object or VoltRon object}
 }
 \value{
-vector with smoothed score
+vector with smoothed scores
 }
 \description{
 nn_spatial_smooth

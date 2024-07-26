@@ -1,14 +1,13 @@
 #' plot_quant
 #'
-#' @param gsea_score calculated score for each cell
+#' @param gsea_score vector of calculated score for each cell
+#' @param coordinates tissue coordinates
 #' @param truth vector for all cells with 1 for tumor and 0 for normal cells
-#' @param threshold which percentile to take as threshold (1-10)
-#' @param coordinates of cell
 #'
-#' @return plot of truth of prediction
+#' @return plot of truth of prediction thresholded on ROC-curve
 #' @export
 #' @import ggplot2
-#' @examples plot_quant(gsea, coords, truth, 5)
+#' @examples plot_quant(gsea, coords, truth)
 plot_quant <- function(gsea_score, coordinates, truth){
   roc_c <-roc(response= truth, predictor=gsea_score)
   coords <- coords(roc_c, "best", best.method="closest.topleft")
