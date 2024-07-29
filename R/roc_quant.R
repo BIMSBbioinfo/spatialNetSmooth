@@ -5,7 +5,7 @@
 #'
 #' @return return best threshold and accuracy
 #' @export
-#' @importFrom pROC roc
+#' @importFrom pROC roc coords
 #' @examples roc_quant(c(0,1,1), c(-0.03, 0.6, 0.87))
 roc_quant <- function(truth, scores){
   roc_c <-roc(response= truth, predictor=scores)

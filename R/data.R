@@ -12,7 +12,7 @@
 
 #' Human breast-cancer-tissue
 #'
-#' An Seurat-Object containing spatial and gene-expression data of human breats-tissue with cancer
+#' A Seurat-Object containing spatial and gene-expression data of human breats-tissue with cancer
 #' 
 #'
 #' @format A Seurat-Object
@@ -20,3 +20,12 @@
 #' data(seu)
 "seu"
 
+#' Human breast-cancer-tissue
+#'
+#' A VoltRon-Object containing spatial and gene-expression data of human breats-tissue with cancer
+#' 
+#'
+#' @format A VoltRon-Object
+#' @source a paper by Anderson et al. (2021). The processed count matrices, HE-images and metadata with spot-annotation can be found here: https://zenodo.org/records/4751624. The sample used is B1
+#' data(volt)
+"volt"

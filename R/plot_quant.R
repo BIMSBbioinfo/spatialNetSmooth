@@ -7,6 +7,7 @@
 #' @return plot of truth of prediction thresholded on ROC-curve
 #' @export
 #' @import ggplot2
+#' @importFrom pROC roc coords
 #' @examples plot_quant(gsea, coords, truth)
 plot_quant <- function(gsea_score, coordinates, truth){
   roc_c <-roc(response= truth, predictor=gsea_score)
