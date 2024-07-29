@@ -8,39 +8,48 @@ output: html_document
 ```{r setup, include=FALSE}
 library(spatialNetSmooth)
 library(ggplot2)
-library(Seurat)
+library(VoltRon)
 ```
 
 # Smoothing Spatial Gene-Expression with spatialNetSmooth
-First, let's get a small Seurat-Object for testing:
+First, let's get a small Voltron-Object for testing:
 ```{r}
-data(seu)
+data(volt)
 ```
-Next, we need a list of genes on which to calculate gsea-scores for each cell. Per default, spatialNetSmooth uses the Ikarus-Dataset, but it's also possible to use other Genes by specifying a gene-list in .csv-Format:
+Next, we need a list of genes on which to calculate gsea-scores for each cell. Per default, spatialNetSmooth uses a list obtained from the machine learning pipeline [Ikarus](https://doi.org/10.1186/s13059-022-02683-1), but it's also possible to use other Genes by specifying a gene-list in .csv-Format:
 ```{r}
-data(geneset_ikarus)
+genes <- "Datasets - Ikarus - Gene_lists.csv"
 ```
 Let's calculate the raw gsea-scores first. Per default, spatialNetSmooth looks for an assay named "Spatial", but other assays can be specified:
 ```{r}
-gsea_score <- gseaCalc(seu, genes = genes, assay= "Spatial")
-
+volt <- gseaCalc(volt, genes = genes, assay= "Custom_spot")
+gsea_score <- Metadata(volt)$gsea_rat_norm
+gsea_score
 ```
-If we know the ground truth, we can make a spatial plot of the truth of prediction, using a threshold (1-10 meaning the percentiles).
+If we know the ground truth, we can make a spatial plot of the truth of prediction, using a threshold based on the ROC-curve.
 ```{r}
-coord <- GetTissueCoordinates(seu)
-plot_quant(gsea_score, coordinates = coord, truth = truth, threshold = 7)
+coord <- vrCoordinates(volt)
+truth <- readRDS(file.path("..", "data", "truth.Rds"))
+truth <- as.vector(truth)
+plot_quant(gsea_score, coordinates = coord, truth = truth)
 ```
-To make the prediction more accurate, we can can calculate the scores using network-smoothing. There are different options for this, which either rely on spatial neighbourhood, a similarity in gene expression or a mixture of both. In this example, we will do smoothing based on nearest neighbours expression-vise first and spatial afterwards. For this, we use the function nn_spatial_smooth().
+To make the prediction more accurate, we can smooth the scores using network-smoothing. There are different options for this, which either rely on spatial neighbourhood, a similarity in gene expression or a mixture of both. In this example, we will do smoothing based on profile neighbors first and spatial afterwards. For this, we use the function nn_spatial_smooth(). The option "k" specifies the distance of each spot to it's spatial neighbors.
 ```{r}
-smooth_scores<- nn_spatial_smooth(seu, graph = "nn")
+smooth_scores<- nn_spatial_smooth(volt, graph = "snn", k=7)
+smooth_scores
 ```
 Again, we can compare the prediction to the ground-truth:
 ```{r}
-plot_quant(smooth_scores, coordinates = coord, truth = truth, threshold = 7)
+smooth_scores <- as.vector(smooth_scores)
+plot_quant(smooth_scores, coordinates = coord, truth = truth)
 ```
-It is also possible to specify the smoothing-coefficient alpha for netSmooth and calculate the F1-Score of the prediction for different thresholds:
+It is also possible to specify the smoothing-coefficient alpha for netSmooth and calculate the F1-Score of the prediction for different thresholds based on quantiles:
 ```{r}
-smooth_scores<- nn_spatial_smooth(seu, a1 = 0.5, a2 = 0.8, graph = "nn")
-F1 <- F1_quant(smooth_scores, truth)
+smooth_scores<- nn_spatial_smooth(volt, a1 = 0.5, a2 = 0.8, graph = "nn")
+F1_quant(smooth_scores, truth, gsea_raw = gsea_score)
+```
+The best threshold according to the ROC-curve and its accuracy can be calculated:
+```{r}
+roc_quant(truth, smooth_scores)
 ```
 
