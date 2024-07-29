@@ -15,6 +15,6 @@ data(seu)
 seu
 }
 \description{
-An Seurat-Object containing spatial and gene-expression data of human breats-tissue with cancer
+A Seurat-Object containing spatial and gene-expression data of human breats-tissue with cancer
 }
 \keyword{datasets}
