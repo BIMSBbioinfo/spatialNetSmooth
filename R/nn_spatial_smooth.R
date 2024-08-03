@@ -32,6 +32,9 @@ nn_spatial_smooth <- function(se, genes = "Datasets - Ikarus - Gene_lists.csv", 
   return(smoothed)
   }
   else if(inherits(se, "VoltRon")){
+    if (!requireNamespace("VoltRon", quietly = TRUE)) {
+    stop("The VoltRon package is required but not installed.")
+  }
     if (!("gsea_rat_norm" %in% colnames(Metadata(se)))) {
       se <- gseaCalc(se, genes, assay)
     }
