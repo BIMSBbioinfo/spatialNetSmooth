@@ -30,6 +30,9 @@ alpha_nn_spatial_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists
     gsea_smoothed <- netSmooth(gsea_score, linear_comb, alpha = a)
     return(gsea_smoothed)
   }else if(inherits(seu, "VoltRon")){
+    if (!requireNamespace("VoltRon", quietly = TRUE)) {
+    stop("The VoltRon package is required but not installed.")
+  }
     if (!("gsea_rat_norm" %in% colnames(Metadata(seu)))) {
       seu <- gseaCalc(seu, genes, assay)
     }
