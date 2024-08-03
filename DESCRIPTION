@@ -14,6 +14,8 @@ Suggests:
     VoltRon
 Config/testthat/edition: 3
 biocViews:
+Depends:
+    clusterExperiment (>=2.24.0)
 Imports: 
     Seurat,
     ggplot2,
