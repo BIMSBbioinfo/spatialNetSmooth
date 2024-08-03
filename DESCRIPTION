@@ -3,7 +3,7 @@ Type: Package
 Title: Smoothing GSEA-scores using netSmooth
 Version: 0.1.0
 Author: Rahel Berghold
-Maintainer: rabe-berlin@posteo.de
+Maintainer: Rahel Berghold <rabe-berlin@posteo.de>
 Description: Calculates GSEA-scores of an object (Seurat or VoltRon) and smoothes the scores using network propagation. The scores can be thresholded and plottet against a known ground truth.
 License: What license is it under?
 Encoding: UTF-8
