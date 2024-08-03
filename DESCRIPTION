@@ -15,7 +15,7 @@ Suggests:
 Config/testthat/edition: 3
 biocViews:
 Depends:
-    clusterExperiment (>=2.3.0)
+    clusterExperiment
 Imports: 
     Seurat,
     ggplot2,
