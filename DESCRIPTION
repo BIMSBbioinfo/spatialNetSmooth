@@ -13,6 +13,17 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Depends: 
-    R (>= 2.10),
     Seurat,
-    ggplot2
+    ggplot2,
+    VoltRon,
+    BiocParallel,
+    GSEABase,
+    GSVA,
+    Matrix,
+    SingleCellExperiment,
+    caret,
+    magrittr,
+    netSmooth,
+    pROC,
+    parallelDist
+    
