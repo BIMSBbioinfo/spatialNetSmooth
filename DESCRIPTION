@@ -15,7 +15,7 @@ Suggests:
 Config/testthat/edition: 3
 biocViews:
 Depends:
-    clusterExperiment (>=2.24.0)
+    clusterExperiment (>=2.3.0)
 Imports: 
     Seurat,
     ggplot2,
@@ -27,4 +27,4 @@ Imports:
     netSmooth,
     pROC,
     parallelDist
-Additional_repositories: https://github.com/BIMSBbioinfo/VoltRon/
+Remotes: epurdom/clusterExperiment, BIMSBbioinfo/VoltRon
