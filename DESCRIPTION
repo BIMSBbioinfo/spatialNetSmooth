@@ -25,4 +25,4 @@ Imports:
     netSmooth,
     pROC,
     parallelDist
-    
+Additional_repositories: https://github.com/BIMSBbioinfo/VoltRon/
