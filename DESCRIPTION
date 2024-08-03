@@ -12,6 +12,7 @@ RoxygenNote: 7.3.1
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+biocViews: VoltRon, netSmooth
 Depends: 
     Seurat,
     ggplot2,
@@ -19,8 +20,6 @@ Depends:
     BiocParallel,
     GSEABase,
     GSVA,
-    Matrix,
-    SingleCellExperiment,
     caret,
     magrittr,
     netSmooth,
