@@ -24,6 +24,9 @@ nn_smooth <- function(seu, genes = "Datasets - Ikarus - Gene_lists.csv", assay =
     smoothed <- netSmooth(gsea_score, neighbours, alpha = a)
     return(smoothed)
   }else if(inherits(seu, "VoltRon")){
+    if (!requireNamespace("VoltRon", quietly = TRUE)) {
+    stop("The VoltRon package is required but not installed.")
+  }
     if (!("gsea_rat_norm" %in% colnames(Metadata(seu)))) {
       seu <- gseaCalc(seu, genes, assay)
     }
