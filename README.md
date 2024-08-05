@@ -23,8 +23,9 @@ if (!requireNamespace("devtools", quietly=TRUE))
 	install.packages("devtools")
 install_github("BIMSBbioinfo/spatialNetSmooth", build_vignettes=FALSE, 
   dependencies=TRUE)
-For using VoltRon objects, VoltRon has to be installed. See the [instructions for installation](https://github.com/BIMSBbioinfo/VoltRon).
 ```
+
+For using VoltRon objects, VoltRon has to be installed. See the [instructions for installation](https://github.com/BIMSBbioinfo/VoltRon).
 
 # How to use
 See the [Tutorial](https://github.com/BIMSBbioinfo/spatialNetSmooth/blob/main/vignettes/Tutorial.Rmd)
